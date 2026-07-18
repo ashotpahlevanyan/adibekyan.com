@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hayk Adibekyan — Senior C# / .NET Developer</title>
+<meta name="description" content="Senior C# / .NET Developer with 9+ years of experience building high-load sportsbook backend systems, APIs and third-party integrations. Yerevan, Armenia.">
+<meta name="author" content="Hayk Adibekyan">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://adibekyan.com/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Hayk Adibekyan — Senior C# / .NET Developer">
+<meta property="og:description" content="9+ years building high-load .NET backend systems, APIs and third-party integrations.">
+<meta property="og:url" content="https://adibekyan.com/">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235d5fef'/><text y='.92em' x='50%25' text-anchor='middle' font-size='60' font-family='system-ui,sans-serif' font-weight='700' fill='white'>A</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hayk Adibekyan",
+  "jobTitle": "Senior C# / .NET Developer",
+  "url": "https://adibekyan.com/",
+  "email": "mailto:Hayko1746449@gmail.com",
+  "telephone": "+374-77-944-846",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Yerevan",
+    "addressCountry": "AM"
+  },
+  "knowsLanguage": ["Armenian", "Russian", "English"],
+  "knowsAbout": ["C#", ".NET Core", "ASP.NET Core Web API", "Entity Framework Core", "Microsoft SQL Server", "Azure", "RabbitMQ", "Kafka"]
+}
+</script>
+
+<style>
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+
+  :root {
+    --accent:        #5d5fef;
+    --accent-soft:   #ececfe;
+    --accent-text:   #4b4dd6;
+
+    --bg:            #ffffff;
+    --surface:       #f7f8fa;
+    --surface-2:     #ffffff;
+    --text:          #16191d;
+    --text-muted:    #5a6472;
+    --line:          #e4e7ec;
+
+    --hero-bg:       #0d1117;
+    --hero-text:     #f2f4f8;
+    --hero-muted:    #9aa5b4;
+    --hero-line:     #262d38;
+
+    --radius:        14px;
+    --maxw:          62rem;
+    --readw:         46rem;
+
+    --shadow-sm:     0 1px 2px rgba(16, 20, 28, .06),
+                     0 1px 3px rgba(16, 20, 28, .04);
+    --shadow-md:     0 4px 12px rgba(16, 20, 28, .07),
+                     0 2px 4px rgba(16, 20, 28, .04);
+
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent:      #8b8dff;
+      --accent-soft: #1e2030;
+      --accent-text: #a5a7ff;
+
+      --bg:          #0d1117;
+      --surface:     #141920;
+      --surface-2:   #161c24;
+      --text:        #e8ebf0;
+      --text-muted:  #9aa5b4;
+      --line:        #242b35;
+
+      --hero-bg:     #080b0f;
+      --hero-line:   #1e242e;
+
+      --shadow-sm:   0 1px 2px rgba(0, 0, 0, .4);
+      --shadow-md:   0 4px 14px rgba(0, 0, 0, .45);
+    }
+  }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  p { margin: 0; }
+
+  a { color: var(--accent-text); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--accent);
+    color: #fff;
+    padding: .75rem 1.25rem;
+    z-index: 100;
+    border-radius: 0 0 8px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--hero-bg);
+    color: var(--hero-text);
+    padding: clamp(3.5rem, 11vw, 6.5rem) 0 clamp(3rem, 9vw, 5rem);
+  }
+
+  /* soft radial glow behind the hero content */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    width: min(60rem, 130%);
+    aspect-ratio: 1;
+    transform: translateX(-50%);
+    background: radial-gradient(circle,
+                rgba(93, 95, 239, .22) 0%,
+                rgba(93, 95, 239, .07) 40%,
+                transparent 68%);
+    pointer-events: none;
+  }
+
+  /* faint grid texture */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--hero-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hero-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    opacity: .35;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .hero .wrap {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+    padding: .35rem .85rem;
+    border: 1px solid var(--hero-line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .03);
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--hero-muted);
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35d07f;
+    box-shadow: 0 0 0 3px rgba(53, 208, 127, .18);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 7vw, 3.9rem);
+    letter-spacing: -0.035em;
+  }
+
+  .hero .title {
+    margin-top: .7rem;
+    font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .hero .lede {
+    margin-top: 1.35rem;
+    max-width: 34rem;
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    color: var(--hero-muted);
+  }
+
+  /* -- photo -- */
+
+  .photo {
+    position: relative;
+    width: clamp(9rem, 20vw, 12.5rem);
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+
+  .photo img,
+  .photo .initials {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--hero-line);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+  }
+
+  .photo .initials {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #262d38, #141920);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+
+  /* the <img> hides itself via onerror if the file is missing,
+     revealing the initials fallback underneath */
+  .photo img { position: relative; z-index: 1; }
+  .photo .initials { position: absolute; inset: 0; }
+
+  /* -- actions -- */
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .7rem 1.25rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-size: .925rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform .15s ease, background-color .15s ease,
+                border-color .15s ease;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #4b4dd6; }
+
+  .btn-ghost {
+    border-color: var(--hero-line);
+    color: var(--hero-text);
+    background: rgba(255, 255, 255, .02);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, .07);
+    border-color: #3a4453;
+  }
+
+  /* -- social row -- */
+
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.35rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hero-line);
+    font-size: .9rem;
+  }
+
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    color: var(--hero-muted);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .social a:hover { color: var(--hero-text); }
+  .social svg { width: 16px; height: 16px; }
+
+  @media (max-width: 46rem) {
+    .hero .wrap {
+      grid-template-columns: 1fr;
+      justify-items: start;
+    }
+    .photo { order: -1; margin-bottom: .5rem; }
+  }
+
+  /* ============================================================
+     SECTIONS
+     ============================================================ */
+
+  section { padding: clamp(3rem, 7vw, 4.75rem) 0; }
+
+  section + section { border-top: 1px solid var(--line); }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .section-head h2 {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    white-space: nowrap;
+  }
+
+  .section-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .prose {
+    max-width: var(--readw);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+  }
+
+  /* ============================================================
+     SKILL CARDS
+     ============================================================ */
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.4rem;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform .18s ease, box-shadow .18s ease,
+                border-color .18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  }
+
+  .card h3 {
+    margin-bottom: .9rem;
+    font-size: .95rem;
+    color: var(--text);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tags li {
+    padding: .28rem .6rem;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    font-family: var(--mono);
+    font-size: .78rem;
+    font-weight: 500;
+  }
+
+  /* ============================================================
+     TIMELINE
+     ============================================================ */
+
+  .timeline {
+    position: relative;
+    max-width: var(--readw);
+    margin: 0;
+    padding: 0 0 0 1.75rem;
+    list-style: none;
+    border-left: 2px solid var(--line);
+  }
+
+  .timeline > li { position: relative; padding-bottom: 2.5rem; }
+  .timeline > li:last-child { padding-bottom: 0; }
+
+  .timeline > li::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem - 7px);
+    top: .55rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--line);
+  }
+
+  /* highlight the current / most recent role */
+  .timeline > li.current::before {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .job-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: .2rem 1rem;
+  }
+
+  .job-head h3 { font-size: 1.1rem; }
+
+  .date {
+    font-family: var(--mono);
+    font-size: .82rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .org {
+    margin-top: .2rem;
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--accent-text);
+  }
+
+  .bullets {
+    margin: .9rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+
+  .bullets li { margin-bottom: .45rem; }
+  .bullets li::marker { color: var(--accent); }
+
+  /* ============================================================
+     TWO-COLUMN FOOT SECTIONS
+     ============================================================ */
+
+  .split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .plain { margin: 0; padding: 0; list-style: none; }
+  .plain li { margin-bottom: 1.1rem; }
+  .plain li:last-child { margin-bottom: 0; }
+  .plain strong { display: block; font-size: 1rem; }
+  .plain span { font-size: .9rem; color: var(--text-muted); }
+
+  /* ============================================================
+     CONTACT + FOOTER
+     ============================================================ */
+
+  .contact-band {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .contact-band h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: .75rem;
+  }
+
+  .contact-band .prose {
+    margin: 0 auto 2rem;
+    text-align: center;
+  }
+
+  .contact-band .actions { justify-content: center; }
+
+  .contact-band .btn-ghost {
+    border-color: var(--line);
+    color: var(--text);
+    background: var(--surface-2);
+  }
+  .contact-band .btn-ghost:hover {
+    border-color: var(--accent);
+    background: var(--surface-2);
+  }
+
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    font-size: .85rem;
+    color: var(--text-muted);
+  }
+
+  footer .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem;
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      transition-duration: .001ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ============================================================
+     PRINT
+     ============================================================ */
+
+  @media print {
+    :root {
+      --bg: #fff; --surface: #fff; --surface-2: #fff;
+      --text: #000; --text-muted: #333;
+      --line: #ccc; --accent-text: #333; --accent-soft: #f0f0f0;
+    }
+    body { font-size: 10.5pt; }
+    .hero {
+      background: #fff; color: #000;
+      padding: 0 0 1rem;
+      border-bottom: 2px solid #000;
+    }
+    .hero::before, .hero::after { display: none; }
+    .hero .title { color: #333; }
+    .hero .lede { color: #333; }
+    .photo, .actions, .contact-band, footer, .skip { display: none; }
+    section { padding: 1.25rem 0; break-inside: avoid; }
+    .card { box-shadow: none; }
+    .social a { color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Open to senior .NET roles</span>
+
+      <h1>Hayk Adibekyan</h1>
+      <p class="title">Senior C# / .NET Developer</p>
+
+      <p class="lede">
+        9+ years building backend systems that stay fast under load — including
+        7 years on high-traffic sportsbook platforms and third-party API
+        integrations at Softconstruct. Based in Yerevan, Armenia.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="docs/Hayk_Adibekyan_CV.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download CV
+        </a>
+        <a class="btn btn-ghost" href="mailto:Hayko1746449@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-10 6L2 7"/>
+          </svg>
+          Get in touch
+        </a>
+      </div>
+
+      <!-- TODO: replace the two href="#" values with Hayk's real profile URLs,
+           or delete whichever line he doesn't use. -->
+      <nav class="social" aria-label="Profiles and contact">
+        <a href="#" rel="me noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .92.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="#" rel="me noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="mailto:Hayko1746449@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>
+          </svg>
+          Hayko1746449@gmail.com
+        </a>
+        <a href="tel:+37477944846">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/>
+          </svg>
+          +374 77 944 846
+        </a>
+      </nav>
+    </div>
+
+    <!-- TODO: drop a square headshot at assets/hayk.jpg (600×600 or larger).
+         Until then the initials circle below shows automatically. -->
+    <div class="photo">
+      <div class="initials" aria-hidden="true">HA</div>
+      <img src="assets/hayk.jpg" alt="Hayk Adibekyan"
+           onerror="this.style.display='none'">
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head"><h2>About</h2></div>
+      <p class="prose">
+        Senior C# / .NET Developer with 9+ years of professional experience,
+        including over 7 years building and maintaining sportsbook/betting
+        backend systems and third-party API integrations at Softconstruct.
+        Skilled in designing and developing scalable, high-load web services and
+        APIs using .NET Core, ASP.NET Core Web API, Entity Framework / EF Core,
+        and SQL Server, with hands-on experience in Azure Cloud and
+        message-driven architectures using RabbitMQ/Kafka. Strong analytical
+        background from prior roles in market development, combined with deep
+        technical expertise in modern .NET technologies.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS
+       ============================================================ -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head"><h2>Technical Skills</h2></div>
+      <div class="cards">
+
+        <div class="card">
+          <h3>Languages &amp; Frameworks</h3>
+          <ul class="tags">
+            <li>C#</li><li>.NET Core</li><li>.NET 6–8</li>
+            <li>ASP.NET Core Web API</li><li>EF Core</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Databases</h3>
+          <ul class="tags">
+            <li>MS SQL Server</li><li>Query optimization</li>
+            <li>Stored procedures</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Cloud &amp; Messaging</h3>
+          <ul class="tags">
+            <li>Azure</li><li>RabbitMQ</li><li>Kafka</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Architecture</h3>
+          <ul class="tags">
+            <li>RESTful API design</li><li>Third-party integrations</li>
+            <li>Message-driven systems</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Tools &amp; Practices</h3>
+          <ul class="tags">
+            <li>Git</li><li>Unit testing</li><li>Code review</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SELECTED WORK
+       ------------------------------------------------------------
+       PLACEHOLDER CONTENT — the CV has no project-level detail.
+       Ask Hayk for 2–3 systems he's proud of and rewrite these.
+       Strongest format: what it did, the scale it ran at, what he
+       personally owned, and the measurable result.
+       If he can't supply detail, DELETE this whole section rather
+       than shipping vague copy — empty beats generic.
+       ============================================================ -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head"><h2>Selected Work</h2></div>
+      <div class="cards">
+
+        <div class="card">
+          <h3>Sportsbook Betting Engine</h3>
+          <p class="prose" style="font-size:.95rem">
+            [Placeholder] Backend services handling live odds and bet placement
+            for a high-traffic sportsbook. Add: peak requests/sec, number of
+            markets, what Hayk owned end-to-end.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Third-Party Provider Integrations</h3>
+          <p class="prose" style="font-size:.95rem">
+            [Placeholder] Integration layer for external odds and payment
+            providers. Add: how many providers, how failures were isolated,
+            data volumes handled.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Message-Driven Processing Pipeline</h3>
+          <p class="prose" style="font-size:.95rem">
+            [Placeholder] Asynchronous RabbitMQ/Kafka pipeline decoupling
+            services. Add: throughput, latency improvement, what problem it
+            replaced.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE
+       ============================================================ -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="section-head"><h2>Experience</h2></div>
+      <ol class="timeline">
+
+        <li class="current">
+          <div class="job-head">
+            <h3>Senior .NET Developer</h3>
+            <span class="date">2019 – 2026</span>
+          </div>
+          <p class="org">Softconstruct LLC · Yerevan, Armenia</p>
+          <ul class="bullets">
+            <li>Designed, developed, and maintained backend services for a high-load sportsbook/betting platform using C#, .NET Core, and ASP.NET Core Web API.</li>
+            <li>Built and integrated third-party APIs, ensuring reliable data exchange with external providers and partners.</li>
+            <li>Built and optimized data access layers with Entity Framework / EF Core and Microsoft SQL Server, improving query performance for high-traffic systems.</li>
+            <li>Implemented message-driven communication between services using RabbitMQ/Kafka to support asynchronous, high-throughput processing.</li>
+            <li>Deployed and supported services on Azure Cloud, contributing to system reliability and scalability.</li>
+            <li>Participated in the full software development lifecycle, including code reviews, unit testing, and production support.</li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="job-head">
+            <h3>Market Development Manager</h3>
+            <span class="date">2017 – 2019</span>
+          </div>
+          <p class="org">Marila LLC · Yerevan, Armenia</p>
+          <ul class="bullets">
+            <li>Managed market development activities, client relationships, and sales growth initiatives.</li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="job-head">
+            <h3>Delivery Specialist</h3>
+            <span class="date">2012 – 2017</span>
+          </div>
+          <p class="org">Marila LLC · Yerevan, Armenia</p>
+          <ul class="bullets">
+            <li>Handled logistics and delivery operations, ensuring timely and accurate order fulfillment.</li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="job-head">
+            <h3>Market Development Manager</h3>
+            <span class="date">2010 – 2012</span>
+          </div>
+          <p class="org">ED &amp; TAG LLC · Yerevan, Armenia</p>
+          <ul class="bullets">
+            <li>Drove market expansion initiatives and managed client acquisition efforts.</li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="job-head">
+            <h3>Military Service</h3>
+            <span class="date">2008 – 2010</span>
+          </div>
+          <p class="org">Republic of Armenia</p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EDUCATION + LANGUAGES
+       ============================================================ -->
+  <section class="reveal">
+    <div class="wrap">
+      <div class="split">
+
+        <div>
+          <div class="section-head"><h2>Education</h2></div>
+          <ul class="plain">
+            <li>
+              <strong>Polytechnic Institute</strong>
+              <span>Production Line Design (Engineering) · 2003 – 2008</span>
+            </li>
+            <li>
+              <strong>Gh. Aghayan Secondary School</strong>
+              <span>1993 – 2003</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="section-head"><h2>Languages</h2></div>
+          <ul class="plain">
+            <li><strong>Armenian</strong><span>Native / Fluent</span></li>
+            <li><strong>Russian</strong><span>Fluent</span></li>
+            <li><strong>English</strong><span>Good working proficiency</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="contact-band reveal">
+    <div class="wrap">
+      <h2>Let's work together</h2>
+      <p class="prose">
+        Open to senior backend and .NET engineering roles — remote or based in
+        Yerevan. The fastest way to reach me is email or WhatsApp.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:Hayko1746449@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://wa.me/37477944846"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost" href="docs/Hayk_Adibekyan_CV.pdf" download>Download CV</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Hayk Adibekyan</span>
+    <span>Yerevan, Armenia</span>
+  </div>
+</footer>
+
+<script>
+  // current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // fade sections in as they scroll into view
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .05 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
